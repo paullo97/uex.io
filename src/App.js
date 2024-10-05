@@ -1,13 +1,17 @@
-import './App.css';
-import RegisterForm from './pages/register';
-import { AlertProvider } from './services/alertService';
+import RegisterForm from "./pages/register";
+import Login from "./pages/login";
+import { AlertProvider } from "./services/alertService";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <AlertProvider>
-      <div className='container'>
-        <RegisterForm />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<RegisterForm />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
     </AlertProvider>
   );
 }
