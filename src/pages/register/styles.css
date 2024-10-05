@@ -1,3 +1,9 @@
+.container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  }
+  
 .register {
     display: flex;
     justify-content: center;
@@ -33,11 +39,11 @@ form {
     margin-bottom: 3%;
 }
 
-.login {
+.goLogin {
     cursor: pointer;
 }
 
-.login:hover {
+.goLogin:hover {
     color: blue;
     text-decoration: underline;
 }

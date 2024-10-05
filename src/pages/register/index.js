@@ -5,7 +5,7 @@ import './styles.css';
 import StorageService from '../../services/storageService';
 import { useAlert } from '../../services/alertService';
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 const INITIAL_VALUES = {
     email: '',
@@ -15,6 +15,7 @@ const INITIAL_VALUES = {
 const RegisterForm = () => {
     const { showAlert } = useAlert();
     const [ initialValues, setInitialValues ] = useState({ ...INITIAL_VALUES });
+    const navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
         email: Yup.string().required('Email is required'),
@@ -31,6 +32,7 @@ const RegisterForm = () => {
         StorageService.saveUser(values);
         showAlert('success', 'User registered successfully!');
         setInitialValues({ ...INITIAL_VALUES });
+        goLogin();
     }
 
     const { 
@@ -46,7 +48,12 @@ const RegisterForm = () => {
         onSubmit
     });
 
+    const goLogin = () => {
+        navigate('/login');
+    }
+
     return (
+        <div className='container'>
         <Container maxWidth="md" className='register'>
             <h1>CADASTRO</h1>
 
@@ -80,9 +87,10 @@ const RegisterForm = () => {
                     <Button variant="contained" size="large" type="submit">Register</Button>
                 </div>
 
-                <small className='login' onClick={() => console.warn('TODO: Implements modal to login')}>Já tem conta? clique Aqui</small>
+                <small className='goLogin' onClick={goLogin}>Já tem conta? clique Aqui</small>
             </form>
         </Container>
+        </div>
     );
 }
 
