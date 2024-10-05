@@ -1,18 +1,28 @@
 // storageService.js
 const StorageService = {
-    saveUser: (user) => {
-        localStorage.setItem('user', JSON.stringify(user));
+    saveUser: (newUser) => {
+        const users = StorageService.getUsers() || [];
+        const userExists = users.some(user => user.email === newUser.email);
+        
+        if (!userExists) {
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
     },
-    getUser: () => {
-        const user = localStorage.getItem('user');
-        return user ? JSON.parse(user) : null;
+    getUsers: () => {
+        const users = localStorage.getItem('users');
+        return users ? JSON.parse(users) : null;
     },
-    clearUser: () => {
-        localStorage.removeItem('user');
+    clearUsers: () => {
+        localStorage.removeItem('users');
     },
     userExists: (email) => {
-        const user = StorageService.getUser();
-        return user && user.email === email;
+        const users = StorageService.getUsers();
+        return users && users.some(user => user.email === email);
+    },
+    validateUser: (email, senha) => {
+        const users = StorageService.getUsers();
+        return users && users.some(user => user.email === email && user.senha === senha);
     }
 };
 
