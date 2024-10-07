@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextField } from '@mui/material';
 import IMask from 'imask';
 
 function PhoneInput({ name, value, onChange, onBlur, error }) {
   const inputRef = useRef(null);
+  const [maskedValue, setMaskedValue] = useState(value);
 
   useEffect(() => {
     const maskOptions = {
@@ -21,6 +22,12 @@ function PhoneInput({ name, value, onChange, onBlur, error }) {
 
     const mask = IMask(inputRef.current, maskOptions);
 
+    mask.on('accept', () => {
+      const unmaskedValue = mask.unmaskedValue;
+      setMaskedValue(mask.value);
+      onChange({ target: { name, value: unmaskedValue } });
+    });
+
     return () => {
       mask.destroy();
     };
@@ -33,9 +40,11 @@ function PhoneInput({ name, value, onChange, onBlur, error }) {
       variant="outlined"
       fullWidth
       name={name}
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
+      value={maskedValue}
+      onBlur={(e) => {
+        setMaskedValue(maskedValue);
+        onBlur(e);
+      }}
       error={error}
       helperText={error ? "Invalid phone number" : ""}
 
