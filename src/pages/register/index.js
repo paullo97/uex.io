@@ -49,7 +49,7 @@ const RegisterForm = () => {
     });
 
     const goLogin = () => {
-        navigate('/login');
+        navigate('/login', { replace: true });
     }
 
     return (
