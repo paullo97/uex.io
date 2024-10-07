@@ -27,6 +27,7 @@ const Login = () => {
     const onSubmit = (values) => {
         if (StorageService.validateUser(values.email, values.senha)) {
             showAlert('success', 'Login successful!');
+            navigate('/main', { replace: true });
         } else {
             showAlert('error', 'Invalid email or password.');
         }
