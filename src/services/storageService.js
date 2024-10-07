@@ -23,6 +23,9 @@ const StorageService = {
     validateUser: (email, senha) => {
         const users = StorageService.getUsers();
         return users && users.some(user => user.email === email && user.senha === senha);
+    },
+    setUserLog: (email) => {
+        localStorage.setItem('userLogin', email);
     }
 };
 
