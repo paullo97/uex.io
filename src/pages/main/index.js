@@ -5,9 +5,13 @@ import RegisterContact from "./components/registerContact";
 import StorageService from '../../services/storageService';
 import { useAlert } from "../../services/alertService";
 import ShowMap from "./components/showMap";
+import { IconButton } from "@mui/material";
+import { Logout } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const MainForm = () => {
   const { showAlert } = useAlert();
+  const navigate = useNavigate();
 
   const [registerContact, setRegistercontact] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -33,12 +37,22 @@ const MainForm = () => {
 
   const onSaveEdit = (contactEdit) => {
     setRegistercontact(false);
-    console.log(contactEdit);
-    StorageService.editContact(contactEdit.index, contactEdit.contact )
+    StorageService.editContact(contactEdit.index, contactEdit.contact)
+  }
+
+  const logOut = () => {
+    StorageService.logOut();
+    navigate('/login');
   }
 
   return (
     <>
+    <div className="logout">
+      <IconButton aria-label="Log out" onClick={logOut} >
+        <Logout />
+      </IconButton>
+    </div>
+
       <div className="main-content">
         <ContactsList 
           registerNewContact={registerNewContact} 

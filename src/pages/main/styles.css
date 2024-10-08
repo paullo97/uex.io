@@ -2,8 +2,11 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin-top: 5%;
     height: 83vh;
     width: 96vw;
     padding: 30px;
+}
+
+.logout {
+    margin: 10px 20px;
 }
