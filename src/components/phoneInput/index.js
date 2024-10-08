@@ -28,10 +28,15 @@ function PhoneInput({ name, value, onChange, onBlur, error }) {
       onChange({ target: { name, value: unmaskedValue } });
     });
 
+    if (value) {
+      mask.value = value;
+      setMaskedValue(mask.value);
+    }
+
     return () => {
       mask.destroy();
     };
-  }, []);
+  }, [name, onChange, value]);
 
   return (
     <TextField
