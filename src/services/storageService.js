@@ -61,6 +61,15 @@ const StorageService = {
     const userIndex = users.findIndex((user) => user.email === emailLogado);
     
     return users[userIndex]?.contacts || []
+  },
+  delteContact: (contactIndex) => {
+    const emailLogado = localStorage.getItem("userLogin");
+    const users = StorageService.getUsers();
+    const userIndex = users.findIndex((user) => user.email === emailLogado);
+
+    users[userIndex].contacts = users[userIndex].contacts.filter((_, index) => index !== contactIndex);
+
+    localStorage.setItem("users", JSON.stringify(users));
   }
 };
 
