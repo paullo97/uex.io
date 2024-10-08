@@ -1,4 +1,4 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import PhoneInput from "../../../components/phoneInput";
@@ -6,6 +6,7 @@ import Row from "../../../components/row";
 import HelperCEP from "./helperCEP";
 import CpfInput from "../../../components/cpfInput";
 import CepInput from "../../../components/cepInput";
+import { Close } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -86,6 +87,11 @@ const RegisterContact = ({ open, handleClose, onRegister, onEditContact, onSaveE
     <>
       <Modal open={open} onClose={onClose}>
         <Box sx={style}>
+          <div style={{ position: 'relative', top: '-30px', left: '390px' }}>
+            <IconButton onClick={onClose}>
+              <Close />
+            </IconButton>
+          </div>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Register new Contact
           </Typography>

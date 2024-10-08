@@ -1,6 +1,7 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { buscarPorEndereco } from "../../../services/buscaCEP"; // Usando OpenCage
+import { Close } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -47,6 +48,11 @@ const HelperCEP = ({ open, handleClose }) => {
   return (
     <Modal open={open} onClose={() => onClose()}>
       <Box sx={style}>
+      <div style={{ position: 'relative', top: '-30px', left: '790px' }}>
+            <IconButton onClick={() => onClose()}>
+              <Close />
+            </IconButton>
+          </div>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Ajuda com o CEP
         </Typography>
