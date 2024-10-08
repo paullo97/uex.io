@@ -138,7 +138,7 @@ const RegisterContact = ({ open, handleClose, onRegister, onEditContact, onSaveE
                 />
 
                 <Button size="small" onClick={handleHelperCEP}>
-                  Quero ajuda com CEP
+                I need help with ZIP code
                 </Button>
               </Row>
 

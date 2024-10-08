@@ -30,8 +30,8 @@ const MainForm = () => {
     showAlert(
       result ? "success" : "error",
       result
-        ? "Contato Adicionado com Sucesso"
-        : "Contato de CPF já existente na Lista"
+        ? "Contact Added Successfully"
+        : "Contact with CPF already on the List"
     );
   };
 

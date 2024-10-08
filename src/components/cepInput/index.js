@@ -50,7 +50,7 @@ function CepInput({ name, value, onChange, onBlur, responseCEP }) {
         onChange={handleCepChange}
         onBlur={onBlur}
         error={error}
-        helperText={error ? "CEP inválido" : ""}
+        helperText={error ? "Invalid CEP" : ""}
       />
     </div>
   );

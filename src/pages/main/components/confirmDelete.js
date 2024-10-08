@@ -39,8 +39,8 @@ export const ConfirmDelete = ({ open, handleClose, verifyPassword }) => {
         </Typography>
 
         <b>
-          Para Confirmar a Exclusão da sua conta, por favor insira sua senha
-          abaixo
+        To Confirm Deletion of your account, please enter your password
+        below
         </b>
 
         <TextField

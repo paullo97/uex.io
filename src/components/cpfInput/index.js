@@ -41,7 +41,7 @@ function CpfInput({ name, value, onChange, onBlur }) {
       onChange={handleCpfChange}
       onBlur={onBlur}
       error={error}
-      helperText={error ? "CPF inválido" : ""}
+      helperText={error ? "Invalid CPF" : ""}
     />
   );
 }

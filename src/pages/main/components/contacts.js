@@ -69,7 +69,7 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem, editI
         />
       </div>
 
-      <div style={{ padding: '10px', display: 'flex', gap: '10px', flexDirection: 'column', overflowY: 'scroll', height: '89%' }}>
+      <div style={{ padding: '10px', display: 'flex', gap: '10px', flexDirection: 'column', overflowY: 'scroll', height: '79%' }}>
       {contacts.length ? (
         filteredContacts.sort((a, b) =>
           a.nome.toLowerCase().localeCompare(b.nome.toLowerCase())
@@ -87,7 +87,7 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem, editI
             editItem={() => editItem({ index, contact })} />
         ))
       ) : (
-        <p>Nenhum contato encontrado.</p>
+        <p>No contacts found.</p>
       )}
     </div>
 

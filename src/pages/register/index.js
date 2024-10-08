@@ -72,7 +72,7 @@ const RegisterForm = () => {
                     />
                     <TextField
                         type='password'
-                        label="senha"
+                        label="Password"
                         variant="outlined"
                         helperText={touched.senha && errors.senha}
                         error={touched.senha && Boolean(errors.senha)}
@@ -87,7 +87,7 @@ const RegisterForm = () => {
                     <Button variant="contained" size="large" type="submit">Register</Button>
                 </div>
 
-                <small className='goLogin' onClick={goLogin}>Já tem conta? clique Aqui</small>
+                <small className='goLogin' onClick={goLogin}>Already have an account? Click Here</small>
             </form>
         </Container>
         </div>
