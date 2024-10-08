@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import ItemContact from "../../../components/itemContact";
 import { useAlert } from "../../../services/alertService";
 
-const ContactsList = ({ registerNewContact }) => {
+const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem }) => {
   const { showAlert } = useAlert();
 
   const [contacts, setContacts] = useState([]);
-  const [ selectedItem, setSelectedItem ] = useState(null);
 
   useEffect(() => {
     setContacts(StorageService.getContacts());
@@ -48,8 +47,11 @@ const ContactsList = ({ registerNewContact }) => {
             key={index} 
             name={contact.nome} 
             phone={contact.telefone} 
-            onClick={() => setSelectedItem(index)} 
-            selected={selectedItem === index}
+            onClick={() => setSelectedItem({
+              index,
+              contact
+            })} 
+            selected={(selectedItem?.index || 0) === index}
             deleteItem={() => deleteItem(index)} />
         ))
       ) : (
