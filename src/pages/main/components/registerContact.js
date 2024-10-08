@@ -38,7 +38,7 @@ const RegisterContact = ({ open, handleClose, onRegister, onEditContact, onSaveE
   const [helperCEP, setHelperCEP] = useState(false);
 
   const onSubmit = (values) => {
-    if(!!onEditContact?.contact) {
+    if(onEditContact?.index !== undefined) {
       onSaveEdit(values);
     }
     else {
@@ -71,10 +71,10 @@ const RegisterContact = ({ open, handleClose, onRegister, onEditContact, onSaveE
   }
 
   useEffect(() => {
-    if(!!onEditContact?.contact) {
+    if(onEditContact?.index !== undefined) {
       const { nome, cpf, telefone, endereco } = onEditContact.contact;
-      console.log(telefone);
       setValues({
+        index: onEditContact.index,
         nome,
         cpf,
         telefone,
