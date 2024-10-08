@@ -92,6 +92,9 @@ const StorageService = {
       console.error("Usuário não encontrado.");
     }
   },
+  logOut: () => {
+    localStorage.removeItem('userLogin');
+  }
 };
 
 export default StorageService;
