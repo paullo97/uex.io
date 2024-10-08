@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ItemContact from "../../../components/itemContact";
 import { useAlert } from "../../../services/alertService";
 
-const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem }) => {
+const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem, editItem }) => {
   const { showAlert } = useAlert();
 
   const [contacts, setContacts] = useState([]);
@@ -15,7 +15,8 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem }) => 
   }, [registerNewContact]);
 
   const deleteItem = (itemIndex) => {
-    StorageService.delteContact(itemIndex);
+    setSelectedItem(null);
+    StorageService.deleteContact(itemIndex);
     showAlert('success', 'Contato Deletado com Sucesso');
     setContacts(StorageService.getContacts());
   }
@@ -52,7 +53,8 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem }) => 
               contact
             })} 
             selected={(selectedItem?.index || 0) === index}
-            deleteItem={() => deleteItem(index)} />
+            deleteItem={() => deleteItem(index)}
+            editItem={() => editItem({ index, contact })} />
         ))
       ) : (
         <p>Nenhum contato encontrado.</p>
