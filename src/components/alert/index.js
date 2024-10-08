@@ -37,7 +37,7 @@ const AlertComponent = ({ severity, message, duration = 3000, onClose }) => {
   return (
     <Alert icon={getIcon()} severity={severity} style={{
         position: 'absolute',
-        top: '1%',
+        top: '5%',
         left: '40vw',
         padding: '5px 50px'
     }}>
