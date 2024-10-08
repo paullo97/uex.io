@@ -1,5 +1,5 @@
-import { PlusOne } from "@mui/icons-material";
-import { IconButton, Tooltip } from "@mui/material";
+import { PlusOne, Search } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 import StorageService from '../../../services/storageService';
 import { useEffect, useState } from "react";
 import ItemContact from "../../../components/itemContact";
@@ -9,6 +9,7 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem, editI
   const { showAlert } = useAlert();
 
   const [contacts, setContacts] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     setContacts(StorageService.getContacts());
@@ -20,6 +21,12 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem, editI
     showAlert('success', 'Contato Deletado com Sucesso');
     setContacts(StorageService.getContacts());
   }
+
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact?.nome?.toLowerCase().includes(search.toLowerCase()) ||
+      contact?.cpf?.replace(/[.-]/g, '').includes(search)
+  );
   
   return (
     <div style={{ width: "50%", border: "solid black 1px" }}>
@@ -41,9 +48,32 @@ const ContactsList = ({ registerNewContact, selectedItem, setSelectedItem, editI
         </Tooltip>
       </div>
 
+      <div className="search" style={{ padding: '10px' }}>
+
+        <TextField
+          name="search"
+          variant="outlined"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+              autoComplete: 'off'
+            },
+          }}
+          sx={{ width: '100%' }}
+        />
+      </div>
+
       <div style={{ padding: '10px', display: 'flex', gap: '10px', flexDirection: 'column', overflowY: 'scroll', height: '89%' }}>
       {contacts.length ? (
-        contacts.map((contact, index) => (
+        filteredContacts.sort((a, b) =>
+          a.nome.toLowerCase().localeCompare(b.nome.toLowerCase())
+        ).map((contact, index) => (
           <ItemContact 
             key={index} 
             name={contact.nome} 
