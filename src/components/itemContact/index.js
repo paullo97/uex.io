@@ -3,7 +3,7 @@ import "./styles.css";
 import { Delete, Edit } from "@mui/icons-material";
 import { red } from "@mui/material/colors";
 
-const ItemContact = ({ phone, name, selected, onClick, deleteItem }) => {
+const ItemContact = ({ phone, name, selected, onClick, deleteItem, editItem }) => {
   return (
     <div
       className="item"
@@ -21,7 +21,7 @@ const ItemContact = ({ phone, name, selected, onClick, deleteItem }) => {
           </IconButton>
         </Tooltip>
         <Tooltip title="Edit Contact" arrow placement="top">
-          <IconButton aria-label="Edit" color="primary">
+          <IconButton aria-label="Edit" color="primary" onClick={editItem}>
             <Edit />
           </IconButton>
         </Tooltip>
