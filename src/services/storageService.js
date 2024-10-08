@@ -94,7 +94,29 @@ const StorageService = {
   },
   logOut: () => {
     localStorage.removeItem('userLogin');
+  },
+  deleteAccount: (senha) => {
+    const emailLogado = localStorage.getItem("userLogin");
+    let users = StorageService.getUsers();
+  
+    const userIndex = users.findIndex((user) => user.email === emailLogado);
+  
+    if (userIndex === -1) {
+      return false;
+    }
+  
+    const user = users[userIndex];
+    if (user.senha !== senha) {
+      return false;
+    }
+  
+    users = users.filter((_, index) => index !== userIndex);
+  
+    localStorage.setItem("users", JSON.stringify(users));
+  
+    return true;
   }
+  
 };
 
 export default StorageService;
