@@ -1,7 +1,15 @@
 import { PlusOne } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
+import StorageService from '../../../services/storageService';
+import { useEffect, useState } from "react";
 
 const ContactsList = ({ registerNewContact }) => {
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    setContacts(StorageService.getContacts());
+  }, [registerNewContact]);
+
   return (
     <div style={{ width: "50%", border: "solid black 1px" }}>
       <div
@@ -21,6 +29,17 @@ const ContactsList = ({ registerNewContact }) => {
           </IconButton>
         </Tooltip>
       </div>
+
+      <div>
+      {contacts.length ? (
+        contacts.map((contact, index) => (
+          <p key={index}>{contact.nome} - {contact.telefone}</p>
+        ))
+      ) : (
+        <p>Nenhum contato encontrado.</p>
+      )}
+    </div>
+
     </div>
   );
 };
