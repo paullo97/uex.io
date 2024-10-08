@@ -1,6 +1,6 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneInput from "../../../components/phoneInput";
 import Row from "../../../components/row";
 import HelperCEP from "./helperCEP";
@@ -32,12 +32,17 @@ const INITIAL_VALUES = {
   },
 };
 
-const RegisterContact = ({ open, handleClose, onRegister }) => {
+const RegisterContact = ({ open, handleClose, onRegister, onEditContact, onSaveEdit, setEditContact }) => {
   const [initialValues] = useState({ ...INITIAL_VALUES });
   const [helperCEP, setHelperCEP] = useState(false);
 
   const onSubmit = (values) => {
-    onRegister(values);
+    if(!!onEditContact?.contact) {
+      onSaveEdit(values);
+    }
+    else {
+      onRegister(values);
+    }
     setValues({ ...INITIAL_VALUES });
   };
 
@@ -60,8 +65,22 @@ const RegisterContact = ({ open, handleClose, onRegister }) => {
 
   const onClose = () => {
     setValues({ ...INITIAL_VALUES });
+    setEditContact(null);
     handleClose();
   }
+
+  useEffect(() => {
+    if(!!onEditContact?.contact) {
+      const { nome, cpf, telefone, endereco } = onEditContact.contact;
+      console.log(telefone);
+      setValues({
+        nome,
+        cpf,
+        telefone,
+        endereco,
+      })
+    }
+  }, [onEditContact, setValues]);
 
   return (
     <>
