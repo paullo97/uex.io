@@ -33,11 +33,12 @@ const INITIAL_VALUES = {
 };
 
 const RegisterContact = ({ open, handleClose, onRegister }) => {
-  const [initialValues, setInitialValues] = useState({ ...INITIAL_VALUES });
+  const [initialValues] = useState({ ...INITIAL_VALUES });
   const [helperCEP, setHelperCEP] = useState(false);
 
   const onSubmit = (values) => {
     onRegister(values);
+    setValues({ ...INITIAL_VALUES });
   };
 
   const { values, handleSubmit, handleChange, handleBlur, touched, errors, setValues } =
@@ -58,9 +59,8 @@ const RegisterContact = ({ open, handleClose, onRegister }) => {
   }
 
   const onClose = () => {
+    setValues({ ...INITIAL_VALUES });
     handleClose();
-
-    setInitialValues({ ...INITIAL_VALUES });
   }
 
   return (
